@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./index.css">
   <!-- vuetify -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -12,71 +12,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
-  <title>Document</title>
+  <title>3dCalc</title>
 </head>
 
 <body>
   <div id="app">
-    <v-container>         
-      
+    <v-container>          
       <btns-picker></btns-picker>
     </v-container>
-
-
   </div>
-  </div>
-
-
 
   <script type="text/x-template" id="btns-picker-template">
-      
+ 
     <v-app id="inspire">
-
-
-      Пожалуйста, выберите качество печати
-
-      
-    <div class="buttons-panel">
-        <v-list
-
-        >
+       <div class="main-wrapper"> 
+         <v-toolbar-title class="pa-10">
+           Расчет стоимости 3D печати
+          </v-toolbar-title> 
+          <!-- <v-toolbar-title class="pb-5">
+           Выберите качество печати
+          </v-toolbar-title>  -->
+    <div class="card-and-buttons">
+      <v-list class="d-flex justify-space-between flex-column ml-10">
+        
       <btn v-for="(qtype, i) in qtypes" 
       :title="qtype.title"
       :title-of-selected="titleOfSelected"
       :key="qtype.title + qtypes.indexOf(qtype)"
       :whole-info="qtype"
       @select="selectType"
-      class="form-check"
-      style="border-color:#e99210"
+      class="mb-10"
       >
       </btn>
+      </v-list>
 
-      </v-list
-
-        >
-
-
-    <div  v-if="titleOfSelected" id="weight-input"> 
+    <div  v-if="titleOfSelected" class="info-card"> 
       <v-card
       class="mx-auto"
       max-width="344"
+      outlined
       >
       <v-img
         :src="wholeInfo.imgUrl"
-        height="200px"
+        height="150px"
+        width="300px"
       ></v-img>
   
       <v-card-title>
         {{wholeInfo.title}} 
       </v-card-title>
      
-      <v-card-subtitle>
+      <v-card-subtitle class="pb-0">
         Высота слоя - {{wholeInfo.layerHeight}} 
         <br>
-        Тип печати - {{wholeInfo.type}}
+        Тип печати - {{wholeInfo.isFDM ? "FDM" : "SLA"}}
       </v-card-subtitle>
   
-      <v-card-actions>
+      <v-card-actions class="pt-0">
   
         <v-spacer></v-spacer>
 
@@ -101,53 +93,63 @@
         </div>
       </v-expand-transition>
     </v-card>
+    </div>
+    </div>
+    <v-card
+      v-if="titleOfSelected" 
+      flat
+      class="mt-5"
+      width="60%"
+      >
 
-    <label for="customRange1" class="form-label">Укажите массу детали</label>
+    <v-card-text class="black--text">
+      <!-- <v-toolbar-title 
+        class="pt-0 pb-10">
+           Укажите массу детали
+      </v-toolbar-title>  -->
    
       <v-slider
         min="0" 
         max="1000"
         v-model="ex3.val"
-        :label="ex3.label"
-        :thumb-color="ex3.color"
-        :color="ex3.trackColor1"
+        :label="wholeInfo.unitTitle"
+        :thumb-color="wholeInfo.btnColor"
+        :color="wholeInfo.btnColor"
         :track-color="ex3.trackColor2"
         thumb-label="always"
-        :thumb-size="24"
+        :thumb-size="30"
         v-model.number="weight"
       ></v-slider>
-   
 
-    <div 
-      class="alert alert-primary" 
-      role="alert">
+    <v-toolbar-title 
+        class="pt-0 pb-10">
         Ориентировочная стоимость печати: 
         {{Math.round(weight * 0.1 * wholeInfo.costPer10g)}} 
         рублей
-    </div>
-  </div>
-</div>
+      </v-toolbar-title> 
+  </v-card-text>
+  </v-card>
 
+  </div>
   </v-app>
   </script>
 
   <script type="text/x-template" id="btn-template">
-  <v-list-item>
+
     <v-btn 
       type="button" 
-      class="ma-2"
       :outlined="!isSelected"
-      color="warning"
+      :color="wholeInfo.btnColor"
+      
       @click="select"
-      >{{title}}
+      >{{title}} 
     </v-btn>
-  </v-list-item>
+
 
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-  <!-- <script src="https://unpkg.com/vue"></script> -->
   <script src="app.js"></script>
 
 </body>
