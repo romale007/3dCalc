@@ -49,7 +49,7 @@ let BtnsPickerComponent = {
           description: 'Подойдет для крупных деталей...',
           layerHeight: '0.25 мм',
           costPer10g: 17,
-          imgUrl: 'https://s3-eu-west-1.amazonaws.com/3dhubs-knowledgebase/intro-fdm-3d-printing/6-fdm-sample-layers.jpg',
+          imgUrl: '0.25fdm.jpg',
           unitTitle: 'Масса детали, грамм',
           btnColor: 'warning'
         },
@@ -59,7 +59,7 @@ let BtnsPickerComponent = {
           description: 'Подойдет для деталей среднего размера...',
           layerHeight: '0.2 мм',
           costPer10g: 20,
-          imgUrl: 'https://s3-eu-west-1.amazonaws.com/3dhubs-knowledgebase/intro-fdm-3d-printing/6-fdm-sample-layers.jpg',
+          imgUrl: '0.20fdm.jpg',
           unitTitle: 'Масса детали, грамм',
           btnColor: 'warning'
         },
@@ -69,7 +69,7 @@ let BtnsPickerComponent = {
           description: 'Подойдет для мелких деталей...',
           layerHeight: '0.1 мм',
           costPer10g: 40,
-          imgUrl: 'https://s3-eu-west-1.amazonaws.com/3dhubs-knowledgebase/intro-fdm-3d-printing/6-fdm-sample-layers.jpg',
+          imgUrl: '0.1fdm.jpg',
           unitTitle: 'Масса детали, грамм',
           btnColor: 'warning'
         },
@@ -79,7 +79,7 @@ let BtnsPickerComponent = {
           description: 'Для очень мелких деталей...',
           layerHeight: '0.05 мм',
           costPer10g: 62,
-          imgUrl: 'https://s3-eu-west-1.amazonaws.com/3dhubs-knowledgebase/intro-fdm-3d-printing/6-fdm-sample-layers.jpg',
+          imgUrl: '0.05sla.jpg',
           unitTitle: 'Объем детали, мл',
           btnColor: 'green'
         },
