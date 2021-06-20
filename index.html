@@ -26,14 +26,12 @@
  
     <v-app id="inspire">
        <div class="main-wrapper"> 
-         <v-toolbar-title class="pa-10">
+         <!-- <v-toolbar-title class="pa-10 mx-auto"> -->
+        <p class="text-h5 text--primary mx-auto pa-5">
            Расчет стоимости 3D печати
-          </v-toolbar-title> 
-          <!-- <v-toolbar-title class="pb-5">
-           Выберите качество печати
-          </v-toolbar-title>  -->
+        </p> 
     <div class="card-and-buttons">
-      <v-list class="d-flex justify-space-between flex-column ml-10">
+      <v-list class="d-flex justify-space-between flex-column">
         
       <btn v-for="(qtype, i) in qtypes" 
       :title="qtype.title"
@@ -48,14 +46,13 @@
 
     <div  v-if="titleOfSelected" class="info-card"> 
       <v-card
-      class="mx-auto"
-      max-width="344"
+      class="mr-10"
+      max-width="330px"
       outlined
       >
       <v-img
         :src="wholeInfo.imgUrl"
         height="150px"
-        width="300px"
       ></v-img>
   
       <v-card-title>
@@ -84,10 +81,14 @@
       </v-card-actions>
   
       <v-expand-transition>
-        <div v-show="show">
+        <div 
+          v-show="show"
+          style="max-width: 265px"
+          >
           <v-divider></v-divider>
   
-          <v-card-text>
+          <v-card-text
+          >
             {{wholeInfo.description}}
           </v-card-text>
         </div>
@@ -103,10 +104,6 @@
       >
 
     <v-card-text class="black--text">
-      <!-- <v-toolbar-title 
-        class="pt-0 pb-10">
-           Укажите массу детали
-      </v-toolbar-title>  -->
    
       <v-slider
         min="0" 
@@ -121,12 +118,26 @@
         v-model.number="weight"
       ></v-slider>
 
-    <v-toolbar-title 
-        class="pt-0 pb-10">
-        Ориентировочная стоимость печати: 
-        {{Math.round(weight * 0.1 * wholeInfo.costPer10g)}} 
-        рублей
-      </v-toolbar-title> 
+    <v-card
+    flat 
+    class="d-flex flex-row" 
+    >
+        <v-card-text
+        class="pt-0">
+        <v-row>
+        <p class="text-h5 text--primary px-5">
+        Ориентировочная стоимость печати:         
+        </p>
+        <p 
+          class="text-h5 text--primary px-5 rounded"
+          style="background-color: #ffc107"
+          
+        >
+        {{Math.round(weight * 0.1 * wholeInfo.costPer10g)}} руб.
+        </p>
+        </v-row>
+        </v-card-text>
+    </v-card>
   </v-card-text>
   </v-card>
 
