@@ -34,6 +34,7 @@ let BtnsPickerComponent = {
     return {
       show: false,
       weight: null,
+      breakpoint: null,
       titleOfSelected: null,
       wholeInfo: null,
       ex3: {
@@ -90,8 +91,22 @@ let BtnsPickerComponent = {
     selectType(arg) {
       this.titleOfSelected = arg.wholeInfo.title
       this.wholeInfo = arg.wholeInfo
-    }
+    },
   },
+  mounted() {
+    console.log(this.$vuetify.breakpoint);
+
+  },
+  computed: {
+    // breakpoint: function () {
+    //   const breakpoint = this.$vuetify.breakpoint.xs ? 'xs' :
+    //     this.$vuetify.breakpoint.sm ? 'sm' :
+    //       this.$vuetify.breakpoint.md ? 'md' :
+    //         this.$vuetify.breakpoint.xl ? 'xl' :
+    //           'lg'
+    //   return breakpoint;
+    }   
+  }
 }
 
 new Vue({
@@ -100,9 +115,16 @@ new Vue({
   components: {
     'btns-picker': BtnsPickerComponent,
   },
-  // data() {
-  //   return {
-  //     // ex3: { label: 'thumb-color', val: 50, color: 'red' }
-  //   }
-  // },
+  data: () => ({
+    // isMobile: false,
+    }),
+  mounted() {
+    this.onResize() // $route
+    window.addEventListener('resize', this.onResize, {passive: true})
+  },
+  methods: {
+    onResize() {
+      this.isMobile = window.innerWidth < 600
+    },
+  }
 })

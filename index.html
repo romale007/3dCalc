@@ -27,7 +27,7 @@
     <v-app id="inspire">
        <div class="main-wrapper"> 
          <!-- <v-toolbar-title class="pa-10 mx-auto"> -->
-        <p class="text-h5 text--primary mx-auto pa-5">
+        <p class="text-lg-h5 text-md-h5 text--primary mx-auto pa-5">
            Расчет стоимости 3D печати
         </p> 
     <div class="card-and-buttons">
@@ -39,7 +39,7 @@
       :key="qtype.title + qtypes.indexOf(qtype)"
       :whole-info="qtype"
       @select="selectType"
-      class="mb-10"
+      class="mb-5"
       >
       </btn>
       </v-list>
@@ -47,7 +47,7 @@
     <div  v-if="titleOfSelected" class="info-card"> 
       <v-card
       class="mr-10"
-      max-width="330px"
+
       outlined
       >
       <v-img
