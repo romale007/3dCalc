@@ -18,7 +18,11 @@
 <body>
   <div id="app">
     <v-container>          
-      <btns-picker></btns-picker>
+      <btns-picker
+        :is-mobile="isMobile"
+      >
+
+      </btns-picker>
     </v-container>
   </div>
 
@@ -27,17 +31,23 @@
     <v-app id="inspire">
        <div class="main-wrapper"> 
          <!-- <v-toolbar-title class="pa-10 mx-auto"> -->
-        <p class="text-lg-h5 text-md-h5 text--primary mx-auto pa-5">
+        <p class="text-lg-h5 text-xs-h5 text--primary pt-5">
            Расчет стоимости 3D печати
         </p> 
-    <div class="card-and-buttons">
-      <v-list class="d-flex justify-space-between flex-column">
+    <div class="card-and-buttons"
+      :class="{'d-flex flex-column': isMobile}"
+    >
+      <v-list 
+        class="d-flex justify-center flex-row flex-wrap"
+        :class="{'d-flex justify-space-between flex-column': !isMobile}"
+      >
         
       <btn v-for="(qtype, i) in qtypes" 
       :title="qtype.title"
       :title-of-selected="titleOfSelected"
       :key="qtype.title + qtypes.indexOf(qtype)"
       :whole-info="qtype"
+      :is-mobile="isMobile"
       @select="selectType"
       class="mb-5"
       >
@@ -46,20 +56,26 @@
 
     <div  v-if="titleOfSelected" class="info-card"> 
       <v-card
-      class="mr-10"
-
       outlined
+      class="mx-auto"
+      :class="{'mr-10': !isMobile}"
+      :style="{'width': brkpt, 'height': brkpt}"      
       >
       <v-img
         :src="wholeInfo.imgUrl"
         height="150px"
       ></v-img>
   
-      <v-card-title>
+      <v-card-title
+        :class="{'text-body-1': isMobile}"  
+      >
         {{wholeInfo.title}} 
       </v-card-title>
      
-      <v-card-subtitle class="pb-0">
+      <v-card-subtitle 
+        class="pb-0"
+        :class="{'text-body-2': isMobile}"    
+      >
         Высота слоя - {{wholeInfo.layerHeight}} 
         <br>
         Тип печати - {{wholeInfo.isFDM ? "FDM" : "SLA"}}
@@ -79,7 +95,8 @@
   
         </v-btn>
       </v-card-actions>
-  
+          <!-- :class="{'flex-row flex-wrap': isMobile}" -->
+                <!-- :style="{width: brkpt}" -->
       <v-expand-transition>
         <div 
           v-show="show"
@@ -125,7 +142,9 @@
         <v-card-text
         class="pt-0">
         <v-row>
-        <p class="text-h5 text--primary px-5">
+        <p 
+          class="text-lg-h5 text-xs-subtitle text--primary px-5"
+        >
         Ориентировочная стоимость печати:         
         </p>
         <p 
@@ -151,7 +170,8 @@
       type="button" 
       :outlined="!isSelected"
       :color="wholeInfo.btnColor"
-      
+      :x-small="isMobile"
+      :class="{'mx-auto': isMobile}"
       @click="select"
       >{{title}} 
     </v-btn>

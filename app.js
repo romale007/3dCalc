@@ -10,6 +10,9 @@ let BtnComponent = {
     titleOfSelected: {
       type: String
     },
+    isMobile: {
+      type: Boolean
+    }
   },
   computed: {
     isSelected() {
@@ -27,6 +30,11 @@ let BtnComponent = {
 
 let BtnsPickerComponent = {
   template: '#btns-picker-template',
+  props: {  
+    isMobile: {
+      type: Boolean
+    }
+  },
   components: {
     'btn': BtnComponent
   },
@@ -34,7 +42,7 @@ let BtnsPickerComponent = {
     return {
       show: false,
       weight: null,
-      breakpoint: null,
+      // isMobile: false,
       titleOfSelected: null,
       wholeInfo: null,
       ex3: {
@@ -98,15 +106,21 @@ let BtnsPickerComponent = {
 
   },
   computed: {
-    // breakpoint: function () {
-    //   const breakpoint = this.$vuetify.breakpoint.xs ? 'xs' :
-    //     this.$vuetify.breakpoint.sm ? 'sm' :
-    //       this.$vuetify.breakpoint.md ? 'md' :
-    //         this.$vuetify.breakpoint.xl ? 'xl' :
-    //           'lg'
-    //   return breakpoint;
+    brkpt () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return '80%'
+        case 'sm': return '85%'
+        case 'md': return '85%'
+        case 'lg': return '90%'
+        case 'xl': return '90%'
+      }
     }   
-  }
+  },
+  beforeDestroy() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.onResize, { passive: true })
+    }
+  },
 }
 
 new Vue({
@@ -116,7 +130,7 @@ new Vue({
     'btns-picker': BtnsPickerComponent,
   },
   data: () => ({
-    // isMobile: false,
+    isMobile: false,
     }),
   mounted() {
     this.onResize() // $route
