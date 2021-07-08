@@ -59,29 +59,33 @@
       outlined
       class="mx-auto"
       :class="{'mr-10': !isMobile}"
-      :style="{'width': brkpt, 'height': brkpt}"      
+      :style="{'width': brkpt}"      
       >
       <v-img
         :src="wholeInfo.imgUrl"
-        height="150px"
+      :style="{'height': brkpt}"    
       ></v-img>
   
       <v-card-title
-        :class="{'text-body-1': isMobile}"  
+        :class="{'text-body-2 py-3': isMobile}"
       >
         {{wholeInfo.title}} 
       </v-card-title>
      
       <v-card-subtitle 
         class="pb-0"
-        :class="{'text-body-2': isMobile}"    
+        :class="{'text-caption py-1': isMobile}"    
       >
         Высота слоя - {{wholeInfo.layerHeight}} 
         <br>
         Тип печати - {{wholeInfo.isFDM ? "FDM" : "SLA"}}
       </v-card-subtitle>
   
-      <v-card-actions class="pt-0">
+      <v-card-actions 
+        class="pt-0"
+        :class="{'py-0': isMobile}"
+        style="margin-top:-30px"  
+        >
   
         <v-spacer></v-spacer>
 
@@ -100,11 +104,11 @@
       <v-expand-transition>
         <div 
           v-show="show"
-          style="max-width: 265px"
           >
           <v-divider></v-divider>
   
-          <v-card-text
+          <v-card-text 
+            :class="{'text-caption py-1': isMobile}" 
           >
             {{wholeInfo.description}}
           </v-card-text>
@@ -117,24 +121,34 @@
       v-if="titleOfSelected" 
       flat
       class="mt-5"
-      width="60%"
+
       >
 
-    <v-card-text class="black--text">
-   
+    <v-card-text 
+      >
+            <!-- :class="{'text-caption': isMobile}"   -->
       <v-slider
         min="0" 
         max="1000"
         v-model="ex3.val"
-        :label="wholeInfo.unitTitle"
         :thumb-color="wholeInfo.btnColor"
         :color="wholeInfo.btnColor"
         :track-color="ex3.trackColor2"
         thumb-label="always"
         :thumb-size="30"
         v-model.number="weight"
+
+        hide-details
       ></v-slider>
 
+    <v-subheader
+      style='margin: -20px 5px 0px 5px'  
+    >
+      
+      {{wholeInfo.unitTitle}}
+    
+    </v-subheader>
+    
     <v-card
     flat 
     class="d-flex flex-row" 
@@ -143,14 +157,15 @@
         class="pt-0">
         <v-row>
         <p 
-          class="text-lg-h5 text-xs-subtitle text--primary px-5"
+          class="text-lg-h5 text-xs-subtitle text--primary px-0"
+          :class="{'px-5': !isMobile}" 
         >
         Ориентировочная стоимость печати:         
         </p>
         <p 
           class="text-h5 text--primary px-5 rounded"
           style="background-color: #ffc107"
-          
+          :class="{'mx-auto': isMobile}"  
         >
         {{Math.round(weight * 0.1 * wholeInfo.costPer10g)}} руб.
         </p>

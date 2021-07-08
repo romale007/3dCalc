@@ -42,7 +42,6 @@ let BtnsPickerComponent = {
     return {
       show: false,
       weight: null,
-      // isMobile: false,
       titleOfSelected: null,
       wholeInfo: null,
       ex3: {
@@ -108,9 +107,9 @@ let BtnsPickerComponent = {
   computed: {
     brkpt () {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return '80%'
-        case 'sm': return '85%'
-        case 'md': return '85%'
+        case 'xs': return '70%'
+        case 'sm': return '70%'
+        case 'md': return '70%'
         case 'lg': return '90%'
         case 'xl': return '90%'
       }
