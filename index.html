@@ -40,6 +40,7 @@
       <v-list 
         class="d-flex justify-center flex-row flex-wrap"
         :class="{'d-flex justify-space-between flex-column': !isMobile}"
+        :style="{'max-width': '500px'}"   
       >
         
       <btn v-for="(qtype, i) in qtypes" 
