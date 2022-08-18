@@ -1,1 +1,1 @@
-# 3dCalc - an app for calculation of prise for 3d printing (Vue2)
+# 3dCalc - an app for calculation of price for 3d printing (Vue2)
